@@ -1,4 +1,4 @@
-# Home Assistant Community Add-on: WireGuard
+# Home Assistant Community Add-on: WireGuard with custom config file
 
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
