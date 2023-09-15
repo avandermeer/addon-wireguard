@@ -10,13 +10,13 @@ arch:
   - armhf
   - armv7
   - i386
+apparmor: true
+host_network: true
 init: false
 ports:
-  80/tcp: null
-  51820/udp: 51820
+  80/tcp: 80
 ports_description:
-  80/tcp: WireGuard peers status API
-  51820/udp: "WireGuard: forward this port in your router"
+  80/tcp: WireGuard client status API
 hassio_api: true
 privileged:
   - NET_ADMIN
