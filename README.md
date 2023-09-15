@@ -23,6 +23,10 @@
 
 WireGuard: fast, modern, secure VPN tunnel.
 
+## NOTE
+
+__This is a fork from https://github.com/hassio-addons/addon-wireguard. It allows for using a custom wg.conf file.__
+
 ## About
 
 [WireGuard®][wireguard] is an extremely simple yet fast and modern VPN that

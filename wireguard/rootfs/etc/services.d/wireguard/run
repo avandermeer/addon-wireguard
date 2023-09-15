@@ -14,10 +14,28 @@ bashio::log.info "Starting WireGuard..."
 export WG_I_PREFER_BUGGY_USERSPACE_TO_POLISHED_KMOD=1
 
 # Get the interface
-interface="wg0"
-if bashio::config.has_value "server.interface"; then
-    interface=$(bashio::config "server.interface")
+# interface="wg0"
+# if bashio::config.has_value "server.interface"; then
+#     interface=$(bashio::config "server.interface")
+# fi
+
+if bashio::config.has_value 'wg_config_file'; then
+
+    #check if file exists
+    file_path=$(bashio::config "wg_config_file")
+    if [ -e "$file_path" ]; then
+        cp $(bashio::config "wg_config_file") /etc/wireguard/
+
+        # Run WireGuard
+        file_path=$(bashio::config "wg_config_file")
+        interface=$(basename "$file_path" .conf)
+        exec wg-quick up "${interface}"
+
+    else
+        bashio::exit.nok "config file not found (is it in /ssl/wireguard/?), can not start wireguard!"
+    fi
+
+else
+    bashio::exit.nok "config file not set, can not start wireguard!"   
 fi
 
-# Run the WireGuard
-exec wg-quick up "${interface}"
